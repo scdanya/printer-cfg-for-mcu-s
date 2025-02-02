@@ -1,0 +1,93 @@
+[include shell_command.cfg]
+[include mainsail.cfg]
+[include macros.cfg]
+[include aux.cfg]
+[include startup.cfg]
+[include mixer_macro.cfg]
+[include bath_macro.cfg]
+[include thermal_aux.cfg]
+[include actuator.cfg]
+[include klipper_functions.cfg]
+[include config_backup.cfg]
+[include update_klipper.cfg]
+[include pump.cfg]
+[respond]
+[virtual_pins]
+
+[save_variables]
+filename: ~/printer_data/config/variables.cfg
+
+[macro_power_pack]
+enable_jinja_do: True
+enable_jinja_loopcontrols: True
+enable_jinja_filter_bool: True
+enable_jinja_filter_yesno: True
+enable_jinja_filter_onoff: True
+enable_jinja_filter_fromjson: True
+enable_jinja_print: True
+enable_power_printer: True
+
+[mcu]
+serial: /dev/ttyACM0
+baud: 250000
+restart_method: command
+
+[virtual_sdcard]
+path: /home/rpi/printer_data/gcodes
+on_error_gcode: CANCEL_PRINT
+
+[printer]
+kinematics: none
+max_velocity: 1000
+max_accel: 1000
+
+[manual_stepper bath] #Баня
+step_pin: PF11
+dir_pin: PG3
+enable_pin: PG5
+velocity: 2
+microsteps: 16
+endstop_pin: B:PG15
+rotation_distance: 8
+full_steps_per_rotation: 200
+position_endstop: 0
+homing_speed: 3
+
+[tmc2209 manual_stepper bath] #Баня
+uart_pin: PC6
+interpolate: true
+run_current: 0.7
+sense_resistor: 0.110
+stealthchop_threshold: 0
+
+[manual_stepper b_p2] #b_p2
+step_pin: PF13
+dir_pin: !PF12
+enable_pin: !PF14
+microsteps: 16
+rotation_distance: 0.162015
+full_steps_per_rotation: 200
+velocity: 2
+
+[tmc2209 manual_stepper b_p2] #b_p2 +
+uart_pin: PC4
+interpolate: true
+run_current: 0.7
+sense_resistor: 0.110
+stealthchop_threshold: 0
+
+[manual_stepper p2] #a_p2
+step_pin: PG0
+dir_pin: !PG1
+enable_pin: !PF15
+microsteps: 16
+rotation_distance: 0.162951
+full_steps_per_rotation: 200
+velocity: 2
+
+[tmc2209 manual_stepper p2] #a_p2 + 
+uart_pin: PD11
+interpolate: true
+run_current: 0.7
+sense_resistor: 0.110
+stealthchop_threshold: 0
