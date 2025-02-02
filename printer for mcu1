@@ -1,0 +1,130 @@
+[include shell_command.cfg]
+[include mainsail.cfg]
+[include macros.cfg]
+[include aux.cfg]
+[include startup.cfg]
+[include mixer_macro.cfg]
+[include bath_macro.cfg]
+[include thermal_aux.cfg]
+[include actuator.cfg]
+[include klipper_functions.cfg]
+[include config_backup.cfg]
+[include update_klipper.cfg]
+[include pump.cfg]
+[respond]
+[virtual_pins]
+
+[save_variables]
+filename: ~/printer_data/config/variables.cfg
+
+[mcu]
+serial: /dev/ttyACM0
+baud: 250000
+restart_method: command
+
+[virtual_sdcard]
+path: /home/rpi/printer_data/gcodes
+on_error_gcode: CANCEL_PRINT
+
+[printer]
+kinematics: none
+max_velocity: 1000
+max_accel: 1000
+
+############################################____ПОМПЫ____
+
+[manual_stepper b_p1] #b_p1
+step_pin: PF9
+dir_pin: !PF10
+enable_pin: !PG2
+velocity: 2
+microsteps: 16
+rotation_distance: 0.1759429
+full_steps_per_rotation: 200
+
+[tmc2209 manual_stepper b_p1] #b_p1 +
+uart_pin: PF2
+interpolate: true
+run_current: 0.7
+sense_resistor: 0.110
+stealthchop_threshold: 0
+
+[manual_stepper b_s1] #b_s1
+step_pin: PC13
+dir_pin: !PF0
+enable_pin: !PF1
+velocity: 2
+microsteps: 16
+rotation_distance: 0.157514
+full_steps_per_rotation: 200
+
+[tmc2209 manual_stepper b_s1] #b_s1 + 
+uart_pin: PE4
+interpolate: true
+run_current: 0.7
+sense_resistor: 0.110
+stealthchop_threshold: 0
+
+[manual_stepper b_s2] #b_s2
+step_pin: PE2
+dir_pin: !PE3
+enable_pin: !PD4
+velocity: 2
+microsteps: 16
+rotation_distance: 0.18251725
+full_steps_per_rotation: 200
+
+[tmc2209 manual_stepper b_s2] #b_s2 +
+uart_pin: PE1
+interpolate: true
+run_current: 0.7
+sense_resistor: 0.110
+stealthchop_threshold: 0
+
+[manual_stepper p1] #a_p1
+step_pin: PF13
+dir_pin: !PF12
+enable_pin: !PF14
+microsteps: 16
+rotation_distance: 0.162015
+full_steps_per_rotation: 200
+velocity: 2
+
+[tmc2209 manual_stepper p1] #a_p1 +
+uart_pin: PC4
+interpolate: true
+run_current: 0.7
+sense_resistor: 0.110
+stealthchop_threshold: 0
+
+[manual_stepper s1] #a_s1 
+step_pin: PG0
+dir_pin: !PG1
+enable_pin: !PF15
+microsteps: 16
+rotation_distance: 0.162951
+full_steps_per_rotation: 200
+velocity: 2
+
+[tmc2209 manual_stepper s1] #a_s1
+uart_pin: PD11
+interpolate: true
+run_current: 0.7
+sense_resistor: 0.110
+stealthchop_threshold: 0
+
+[manual_stepper s2] #a_s2
+step_pin: PG4
+dir_pin: !PC1
+enable_pin: !PA0
+microsteps: 16
+velocity: 2
+rotation_distance: 0.160264
+full_steps_per_rotation: 200
+
+[tmc2209 manual_stepper s2] #a_s2 +
+uart_pin: PC7
+interpolate: true
+run_current: 0.7
+sense_resistor: 0.110
+stealthchop_threshold: 0
